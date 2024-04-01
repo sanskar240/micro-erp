@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { firestore } from '../config/Firebase'; // Import your Firestore instance
 import InventoryCard from '../components/InventoryCard';
 
@@ -25,8 +25,25 @@ const Inventory = () => {
     fetchInventoryData();
   }, []); // Run only once on component mount
 
+  const deleteItem = async (id) => {
+    try {
+      // Delete item from Firestore
+      await deleteDoc(doc(firestore, 'inventory', id));
+      // Update local state to remove the deleted item
+      setInventoryItems(prevItems => prevItems.filter(item => item.id !== id));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+
   const renderItem = ({ item }) => (
-    <InventoryCard key={item.id} title={item.title} quantity={item.quantity} price={item.price} />
+    <InventoryCard 
+      key={item.id} 
+      title={item.title} 
+      quantity={item.quantity} 
+      price={item.price} 
+      onDelete={() => deleteItem(item.id)} // Pass deleteItem with item id as onDelete prop
+    />
   );
 
   return (
@@ -66,4 +83,3 @@ const styles = StyleSheet.create({
 });
 
 export default Inventory;
-

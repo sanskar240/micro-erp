@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { firestore } from '../config/Firebase';
 import { addDoc, collection } from '@firebase/firestore';
+import {useNavigation} from "@react-navigation/native"
 const StoreForm = () => {
+  const navigation = useNavigation();
   const [itemName, setItemName] = useState('');
   const [price, setPrice] = useState('');
 
@@ -13,9 +15,12 @@ const StoreForm = () => {
             Alert.alert('Error', 'Please fill in all fields.');
             return;
         } 
+       Alert.alert('No error',"Successfully submitted")
+        
         await addDoc(collection(firestore,'store'),{
             itemName: itemName,
             price: parseFloat(price)
+            
         });
         setItemName('');
         setPrice('');
@@ -43,7 +48,10 @@ const StoreForm = () => {
         value={price}
         onChangeText={text => setPrice(text)}
       />
-      <Button title="Submit" onPress={handleFormSubmit} />
+      <Button title="Submit" onPress={()=>{
+        handleFormSubmit();
+        navigation.navigate("StoreFinances");
+      }} />
     </View>
   );
 };

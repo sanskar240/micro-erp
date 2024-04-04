@@ -12,6 +12,7 @@ import Finances from './app/screens/Finances';
 import InventoryFinances from './app/screens/InventoryFinances';
 import StoreFinances from './app/screens/StoreFinances';
 import StoreForm from './app/components/StoreForm';
+import Vendors from './app/screens/Vendors';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,6 +42,15 @@ const MainTabNavigator = () => (
       options={{
         tabBarIcon: ({ color, size }) => (
           <Ionicons name="bag" size={size} color={color} />
+        ),
+      }}
+    />
+     <Tab.Screen
+      name="Vendors"
+      component={Vendors} 
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="basketball" size={size} color={color} />
         ),
       }}
     />

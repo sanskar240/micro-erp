@@ -7,6 +7,8 @@ const StoreFinancesDisplay = () => {
       <Text style={styles.transactionId}>id</Text>
       <Text style={styles.itemName}>name</Text>
       <Text style={styles.price}>price</Text>
+     
+      
     </View>
   );
 };

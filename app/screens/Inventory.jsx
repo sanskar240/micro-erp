@@ -23,13 +23,13 @@ const Inventory = () => {
     };
 
     fetchInventoryData();
-  }, []); // Run only once on component mount
+  }, []); 
 
   const deleteItem = async (id) => {
     try {
-      // Delete item from Firestore
+      
       await deleteDoc(doc(firestore, 'inventory', id));
-      // Update local state to remove the deleted item
+     
       setInventoryItems(prevItems => prevItems.filter(item => item.id !== id));
     } catch (error) {
       console.error('Error deleting item:', error);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const VendorCard = () => {
+const VendorCard = ({name,phone}) => {
   return (
     <View style={styles.card}>
-      <Text style={styles.name}>Nile Inc</Text>
-      <Text style={styles.phone}>8373731334</Text>
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.phone}>{phone}</Text>
     </View>
   );
 };

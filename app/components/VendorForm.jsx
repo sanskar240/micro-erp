@@ -1,13 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { FAB } from 'react-native-paper'
 
-const Home = () => {
+const VendorForm = () => {
   return (
     <View>
-      
+      <Text>This is the Vendor Form component</Text>
     </View>
   )
 }
 
-export default Home;
+export default VendorForm

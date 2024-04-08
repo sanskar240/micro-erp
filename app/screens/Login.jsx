@@ -4,6 +4,11 @@ import { auth } from '../config/Firebase';
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
+//Login Revamp:Permission based auth,a different scereen for vendors and a different one for the shopkeeper
+
+
+
+
 const Login = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
@@ -15,7 +20,7 @@ const Login = () => {
         try {
             const response = await signInWithEmailAndPassword(auth, email, password);
             console.log(response);
-            navigation.navigate('MainTabNavigator'); // Navigate to the Home screen after signing in
+            navigation.navigate('MainTabNavigator'); 
         } catch(error) {
             console.log(error);
             alert("Sign In Failed");
@@ -37,7 +42,6 @@ const Login = () => {
             setLoading(false);
         }
     }
-
     return (
         <View style={styles.container}>
             <View>

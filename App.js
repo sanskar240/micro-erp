@@ -13,6 +13,7 @@ import InventoryFinances from './app/screens/InventoryFinances';
 import StoreFinances from './app/screens/StoreFinances';
 import StoreForm from './app/components/StoreForm';
 import Vendors from './app/screens/Vendors';
+import VendorForm from './app/components/VendorForm';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,6 +68,8 @@ const App = () => {
         <Stack.Screen name="InventoryFinances" component={InventoryFinances} options={{ headerShown: true }} />
         <Stack.Screen name="StoreFinances" component={StoreFinances} options={{ headerShown: true }} />
         <Stack.Screen name="StoreForm" component={StoreForm} options={{ headerShown: true }} />
+        <Stack.Screen name="VendorForm" component={VendorForm} options={{ headerShown: true }} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

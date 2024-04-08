@@ -1,45 +1,41 @@
-import React,{useState} from "react";
-
-import { collection } from "@firebase/firestore";
-import { View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import VendorCard from '../components/VendorCard';
-import { getDocs } from '@firebase/firestore';
-import { useEffect } from 'react';
-import { FlatList } from "react-native";
+import { collection, getFirestore, getDocs } from 'firebase/firestore';
 
 const Vendors = () => {
   const navigation = useNavigation();
-  const [vendorItems,setVendorItems] = useState([]);
+  const [vendorItems, setVendorItems] = useState([]);
 
   useEffect(() => {
     const fetchVendorData = async () => {
       try {
+        const firestore = getFirestore(); // Initialize Firestore instance
         const vendorRef = collection(firestore, 'vendors');
-        const vendorSnapshot = await getDocs(vendorRef);
-        const items = vendorSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const querySnapshot = await getDocs(vendorRef);
+        const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setVendorItems(items);
       } catch (error) {
-        console.error('Error fetching inventory data:', error);
+        console.error('Error fetching vendor data:', error);
       }
     };
-    
 
     fetchVendorData();
   }, []); 
+
   const renderItem = ({ item }) => (
     <VendorCard 
       key={item.id} 
-      name = {item.name}
-      phone  = {item.phone}
-      // Pass deleteItem with item id as onDelete prop
+      name={item.name}
+      phone={item.phone}
     />
   );
 
   return (
     <View style={styles.container}>
-       <FlatList
+      <FlatList
         data={vendorItems}
         renderItem={renderItem}
         keyExtractor={item => item.id}
@@ -50,7 +46,7 @@ const Vendors = () => {
         style={styles.fab}
         icon="plus"
         onPress={() => {
-         navigation.navigate('VendorForm');
+          navigation.navigate('VendorForm');
         }}
       />
     </View>
@@ -69,6 +65,10 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: 'purple', 
+  },
+  flatListContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
 });
 

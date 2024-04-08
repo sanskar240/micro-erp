@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet ,Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { addDoc, collection } from '@firebase/firestore';
+import { firestore } from '../config/Firebase';
 
 const VendorForm = () => {
 
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  const handleSubmit = async()=>{
+    try{
+        if(!name || !phone ){
+            Alert.alert("Please enter all the fields");
+        }
+        Alert.alert("Successfully submitted");
+       await addDoc(collection(firestore,'vendors'),{
+        name:name,
+        phone:parseInt(phone,10)
+       });
+       setName('');
+       setPhone('');
 
-    //Firebase POST
-
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Phone:', phone);
-  };
+    }catch(error){
+        console.error("Error",error);
+        Alert.alert("Oops someting went wrong");
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -28,14 +39,6 @@ const VendorForm = () => {
         onChangeText={text => setName(text)}
       />
 
-      <Text style={styles.label}>Email:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter email"
-        value={email}
-        onChangeText={text => setEmail(text)}
-        keyboardType="email-address"
-      />
 
       <Text style={styles.label}>Phone:</Text>
       <TextInput

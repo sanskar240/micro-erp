@@ -6,6 +6,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { firestore } from '../config/Firebase'; // Import your Firestore instance
 import InventoryCard from '../components/InventoryCard';
 
+
 const Inventory = () => {
   const [inventoryItems, setInventoryItems] = useState([]);
   const navigation = useNavigation();

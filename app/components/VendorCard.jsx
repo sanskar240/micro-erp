@@ -12,25 +12,27 @@ const VendorCard = ({ name, phone }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#F9F9F9',
-    borderRadius: 10,
+    backgroundColor: '#fff', 
+    borderRadius: 10, 
     padding: 20,
     marginBottom: 20,
-    shadowColor: '#000',
+    shadowColor: '#ccc', 
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.2, 
+    shadowRadius: 4, 
+    elevation: 5, 
     width: '80%',
     alignSelf: 'center',
+    borderWidth: 1, 
+    borderColor: '#ddd', 
   },
   name: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#333', 
     marginBottom: 10,
   },
   phone: {
@@ -40,3 +42,4 @@ const styles = StyleSheet.create({
 });
 
 export default VendorCard;
+

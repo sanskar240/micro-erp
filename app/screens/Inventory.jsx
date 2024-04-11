@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   flatListContent: {
-    paddingBottom: 70, // Adjust as needed to accommodate the FAB button
+    paddingBottom: 70,
   },
   fab: {
     position: 'absolute',

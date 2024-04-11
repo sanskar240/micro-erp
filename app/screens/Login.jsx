@@ -4,11 +4,6 @@ import { auth } from '../config/Firebase';
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
-//Login Revamp:Permission based auth,a different scereen for vendors and a different one for the shopkeeper
-
-
-
-
 const Login = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
